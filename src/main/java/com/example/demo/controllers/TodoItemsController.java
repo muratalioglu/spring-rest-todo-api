@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import java.net.URI;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,20 +60,13 @@ public class TodoItemsController {
 	public ResponseEntity<?> putTodoItem(@RequestBody TodoItem todoItem, @PathVariable Long id) {
 		if (id != todoItem.getId()) {
 			return ResponseEntity.badRequest().build();
-		}
-		
-		TodoItem item = repository.save(todoItem);
-		
+		}		
+	
 		if (repository.existsById(id)) {
+			repository.save(todoItem);
+			return ResponseEntity.ok().build();
+		} else {
 			return ResponseEntity.noContent().build();
-		} else {			
-			URI location = ServletUriComponentsBuilder
-					.fromCurrentRequest()
-					.path("{id}")
-					.buildAndExpand(item.getId())
-					.toUri();
-			
-			return ResponseEntity.created(location).build();
 		}
 	}
 	

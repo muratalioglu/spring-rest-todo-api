@@ -56,7 +56,7 @@ public class TodoItemsController {
 	}
 	
 	@PutMapping("{id}")
-	public ResponseEntity<?> putDotoItem(@RequestBody TodoItem todoItem, @PathVariable Long id) {
+	public ResponseEntity<?> putTodoItem(@RequestBody TodoItem todoItem, @PathVariable Long id) {
 		if (id != todoItem.getId()) {
 			return ResponseEntity.badRequest().build();
 		}

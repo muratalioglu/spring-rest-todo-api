@@ -2,8 +2,8 @@ package com.example.demo.controllers;
 
 import java.net.URI;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +19,7 @@ import com.example.demo.repository.TodoItemRepository;
 
 @RestController
 @RequestMapping("/api/todo-items")
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class TodoItemsController {
 
 	private final TodoItemRepository repository;

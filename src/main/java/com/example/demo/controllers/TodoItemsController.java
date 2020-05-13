@@ -57,7 +57,7 @@ public class TodoItemsController {
 						.toUri();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "location");
+		httpHeaders.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "location");
 		httpHeaders.add(HttpHeaders.LOCATION, location.toString());
 		
 		return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).build();

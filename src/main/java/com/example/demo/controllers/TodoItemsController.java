@@ -21,9 +21,9 @@ import com.example.demo.repository.TodoItemRepository;
 
 @RestController
 @RequestMapping("/api/todo-items")
-//@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = "http://localhost:3000")
 public class TodoItemsController {
-
+	
 	private final TodoItemRepository repository;
 	
 	public TodoItemsController(TodoItemRepository repository) {
@@ -57,7 +57,7 @@ public class TodoItemsController {
 						.toUri();
 		
 		HttpHeaders httpHeaders = new HttpHeaders();
-		httpHeaders.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "location");
+		httpHeaders.add(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "location");
 		httpHeaders.add(HttpHeaders.LOCATION, location.toString());
 		
 		return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).build();

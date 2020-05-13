@@ -2,6 +2,8 @@ package com.example.demo.controllers;
 
 import java.net.URI;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +21,7 @@ import com.example.demo.repository.TodoItemRepository;
 
 @RestController
 @RequestMapping("/api/todo-items")
-@CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://localhost:3000" })
 public class TodoItemsController {
 
 	private final TodoItemRepository repository;
@@ -54,7 +56,12 @@ public class TodoItemsController {
 						.buildAndExpand(savedItem.getId())
 						.toUri();
 		
-		return ResponseEntity.created(location).build();
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "location");
+		httpHeaders.add(HttpHeaders.LOCATION, location.toString());
+		
+		return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).build();
+//				header("Location", location.toString()).build();
 	}
 	
 	@PutMapping("{id}")

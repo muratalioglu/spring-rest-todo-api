@@ -2,13 +2,12 @@ import React from 'react';
 
 const TodoList = ({ todos }) => {
     return (
-        <div>
-            <center><h1>Todo List</h1></center>
+        <div>            
             {todos.map((todo) => (
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">{todo.name}</h5>
-                        <p class="card-text">{todo.complete ? "Completed" : ""}</p>
+                <div key={todo.id} className="card">
+                    <div className="card-body">
+                        <h5 className="card-title">{todo.name}</h5>
+                        <p className="card-text">{todo.complete ? "Completed" : ""}</p>
                     </div>
                 </div>
             ))}
